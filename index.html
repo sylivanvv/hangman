@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Виселица</h3>
+    <button onclick="hangman()">Старт игры</button>
+    <script>
+        function hangman(){
+            
+        var words = [
+            'программа',
+            'макака',
+            'оладушек',
+            'корона',
+            'человек',
+            'слон',
+            'птица',
+            'коммунизм',
+            'убийца',
+            'ненавижу',
+            'консоль',
+            'ответ',
+            'фантазия',
+            'ограничена'
+        ]
+        var word = words[Math.floor(Math.random() * words.length)];
+        var answerArr = [];
+        for(var i = 0; i< word.length; i++){
+            answerArr[i] = '_';
+        }
+        var remainingLetters = words.length;
+        var numbOfTry = 7;
+        while(remainingLetters > 0 && numbOfTry > 0){
+            alert(answerArr.join(' '));
+            var guess = prompt('Введите букву или нажмите кнопку "отмена" чтобы покинуть игру'
+              + ' Оставшиеся попытки ' + numbOfTry);
+            if(guess == null){
+                return;
+            }  else if(guess.length != 1){
+                alert('Пожалуйста, введите 1 символ');
+            } else{
+                guess.toLowerCase;
+                var counter = 0;
+                for( var j = 0; j < word.length; j++){
+                    if(guess === word[j] && answerArr[j] !== guess){
+                        answerArr[j] = guess;
+                        counter++;
+                        remainingLetters--;
+                    }
+                }
+                if(counter == 0){
+                    numbOfTry--;
+                }
+            }
+        }
+        if(numbOfTry === 0){
+            alert('Вы проиграли! Это слово - '+ word)
+        } else{
+            alert(answerArr.join(' '));
+            alert('Поздравляю, вы угадали слово '+word);
+        }
+        }
+    </script>
+</body>
+</html>
